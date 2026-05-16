@@ -64,14 +64,6 @@
 }
 
 .clear-button {
-	margin-top: 1rem;
-	border: none;
-	background: transparent;
-	color: #6c757d;
-	cursor: pointer;
-}
-
-.clear-button {
 	margin-top: 2rem;
 	color: white;
 	background-color: #0d6efd; 
