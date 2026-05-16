@@ -1,11 +1,79 @@
-/* 
+.main-container {
+	min-height: 100vh;
+	background-color: #f8f9fa;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+.preset-title {
+	font-size: 6rem;
+	opacity: 0.25;
+	margin: 0;
+	font-weight: 300;
+    color: #e9d6d6; 
+}
 
-*/
+.content-box {
+	width: 50%;
+	background-color: white;
+	border-radius: 6px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.task-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.input-item {
+	padding: 1rem;
+	border-bottom: 1px solid #dee2e6;
+}
+
+.task-input {
+	width: 100%;
+	border: none;
+	font-size: 1.5rem;
+	padding: 0;
+	outline: none;
+}
+
+.task-item {
+	padding: 1rem;
+	font-size: 1.5rem;
+	color: #6c757d;
+	border-bottom: 1px solid #dee2e6;
+}
+
+.empty-message {
+	padding: 1.5rem;
+	text-align: center;
+	font-size: 1.25rem;
+	color: #6c757d;
+	border-bottom: 1px solid #dee2e6;
+}
+
+.footer-text {
+	padding: 0.5rem;
+	color: #6c757d;
+	background-color: white;
+	font-size: 0.9rem;
+}
+
+.clear-button {
+	margin-top: 1rem;
+	border: none;
+	background: transparent;
+	color: #6c757d;
+	cursor: pointer;
+}
+
+.clear-button {
+	margin-top: 2rem;
+	color: white;
+	background-color: #0d6efd; 
+	border-color: #0d6efd;
+}
