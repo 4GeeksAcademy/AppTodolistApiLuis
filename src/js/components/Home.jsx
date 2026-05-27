@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 export function Home() {
-	
 	const [tasks, setTasks] = useState([]);
 	const [inputValue, setInputValue] = useState("");
-
 
 	const username = "luis_timaure";
 	const urlApi = `https://playground.4geeks.com/todo/users/${username}`;
 
-	
 	const loadTasks = () => {
 		fetch(urlApi)
 			.then((response) => {
 				if (response.status === 404) {
-					createUser(); 
+					createUser();
 					return null;
 				}
 				return response.json();
@@ -27,24 +24,22 @@ export function Home() {
 			.catch((error) => console.error("Error cargando tareas:", error));
 	};
 
-	
 	const createUser = () => {
 		fetch(urlApi, { method: "POST" })
 			.then(() => loadTasks())
 			.catch((error) => console.error("Error creando usuario:", error));
 	};
 
-	
 	useEffect(() => {
 		loadTasks();
 	}, []);
 
-	
+
 	const handleAdd = (e) => {
 		if (e.key === "Enter") {
-			e.preventDefault(); 
-			
+			e.preventDefault();
 			const cleanedValue = inputValue.trim();
+			
 			if (cleanedValue !== "") {
 				const newTask = {
 					label: cleanedValue,
@@ -60,24 +55,35 @@ export function Home() {
 				})
 				.then((response) => response.json())
 				.then(() => {
-					loadTasks(); 
-					setInputValue(""); 
+					loadTasks();
+					setInputValue("");
 				})
 				.catch((error) => console.error("Error agregando tarea:", error));
 			}
 		}
 	};
 
-	
+	const handleDelete = (todoId) => {
+		fetch(`https://playground.4geeks.com/todo/todos/${todoId}`, {
+			method: "DELETE"
+		})
+		.then((response) => {
+			if (response.ok) {
+				setTasks(tasks.filter((task) => task.id !== todoId));
+			}
+		})
+		.catch((error) => console.error("Error eliminando la tarea:", error));
+	};
+
 	const handleDeleteAll = () => {
 		fetch(urlApi, { method: "DELETE" })
 			.then((response) => {
 				if (response.ok) {
-					setTasks([]); 
-					createUser(); 
+					setTasks([]);
+					createUser();
 				}
 			})
-			.catch((error) => console.error("Error borrando las tareas:", error));
+			.catch((error) => console.error("Error borrando todas las tareas:", error));
 	};
 
 	return (
@@ -87,7 +93,6 @@ export function Home() {
 			<div className="content-box">
 				<ul className="task-list">
 					<li className="input-item">
-					
 						<input
 							type="text"
 							className="task-input"
@@ -104,9 +109,16 @@ export function Home() {
 						</li>
 					) : (
 						tasks.map((task) => (
-							
-							<li key={task.id} className="task-item">
-								{task.label}
+							<li key={task.id} className="task-item d-flex justify-content-between align-items-center">
+								<span>{task.label}</span>
+
+								<button 
+									className="btn-delete-item text-danger"
+									onClick={() => handleDelete(task.id)}
+									title="Eliminar tarea"
+								>
+									✕
+								</button>
 							</li>
 						))
 					)}
